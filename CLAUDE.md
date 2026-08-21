@@ -106,10 +106,14 @@ Then bump `version` and `sha256` in the tap's `Casks/cleanmymewp.rb` and push. T
 `postflight` that runs `xattr -dr com.apple.quarantine`, because the ad hoc signature is not
 notarized and macOS would otherwise refuse to open the downloaded bundle.
 
-Cask gotchas: `depends_on macos: ">= :sonoma"` and `url ..., verified:` are both deprecated —
-use `depends_on macos: :sonoma` and a bare `url`. `brew audit --cask --new` will still fail on
-"repository not notable enough" and Gatekeeper signature verification; both are expected for a
-personal tap with ad hoc signing.
+Check the cask with `brew style --cask Casks/cleanmymewp.rb` and
+`brew audit --cask --strict --online explodingcb/tap/cleanmymewp` — both pass clean, so treat a
+new offense as a real regression. Do **not** use `brew audit --cask --new`: those are the rules
+for submitting to homebrew-cask core, and two of them can never pass here — "repository not
+notable enough" (needs 75+ stars) and Gatekeeper signature verification (needs a Developer ID
+certificate and notarization, i.e. a paid Apple Developer account). Lint history: `depends_on
+macos: ">= :sonoma"` and `url ..., verified:` are deprecated spellings, and `desc` may not name
+the platform.
 
 ## Status
 
