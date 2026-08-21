@@ -1,0 +1,14 @@
+# Xcode / build output
+build/
+DerivedData/
+*.xcodeproj
+*.xcworkspace
+xcuserdata/
+*.xcuserstate
+dist/
+
+# macOS
+.DS_Store
+
+# Release artifacts
+*.zip

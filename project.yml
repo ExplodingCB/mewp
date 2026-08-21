@@ -1,0 +1,83 @@
+name: CleanMyMewp
+options:
+  bundleIdPrefix: com.chaseculbertson
+  deploymentTarget:
+    macOS: "14.0"
+  createIntermediateGroups: true
+  groupSortPosition: top
+
+settings:
+  base:
+    MARKETING_VERSION: "0.4.1"
+    CURRENT_PROJECT_VERSION: "7"
+    SWIFT_VERSION: "5.0"
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Manual
+    CODE_SIGN_IDENTITY: "-"
+    CODE_SIGNING_REQUIRED: "YES"
+    CODE_SIGNING_ALLOWED: "YES"
+    ENABLE_HARDENED_RUNTIME: "NO"
+    ENABLE_USER_SCRIPT_SANDBOXING: "NO"
+    DEAD_CODE_STRIPPING: "YES"
+  configs:
+    Debug:
+      GCC_OPTIMIZATION_LEVEL: "0"
+      SWIFT_OPTIMIZATION_LEVEL: "-Onone"
+    Release:
+      GCC_OPTIMIZATION_LEVEL: "3"
+      SWIFT_OPTIMIZATION_LEVEL: "-O"
+      SWIFT_COMPILATION_MODE: "wholemodule"
+
+targets:
+  CleanMyMewp:
+    type: application
+    platform: macOS
+    sources:
+      - path: Sources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.chaseculbertson.CleanMyMewp
+        PRODUCT_NAME: CleanMyMewp
+        INFOPLIST_KEY_NSHumanReadableCopyright: "Personal use build"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        COMBINE_HIDPI_IMAGES: "YES"
+    info:
+      path: Sources/App/Info.plist
+      properties:
+        CFBundleName: CleanMyMewp
+        CFBundleDisplayName: CleanMyMewp
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
+        LSMinimumSystemVersion: "14.0"
+        LSApplicationCategoryType: public.app-category.utilities
+        NSHighResolutionCapable: true
+        NSDesktopFolderUsageDescription: "CleanMyMewp scans your Desktop to find large and old files."
+        NSDocumentsFolderUsageDescription: "CleanMyMewp scans your Documents to find large and old files."
+        NSDownloadsFolderUsageDescription: "CleanMyMewp scans your Downloads for junk, duplicates, and old files."
+        NSRemovableVolumesUsageDescription: "CleanMyMewp scans connected volumes to empty their trash and find large files."
+        NSPhotoLibraryUsageDescription: "CleanMyMewp only measures the size of your Photos library so it appears in the storage map. It never opens, reads, or uploads your photos."
+
+  CleanMyMewpTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: Tests
+    dependencies:
+      - target: CleanMyMewp
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.chaseculbertson.CleanMyMewpTests
+        GENERATE_INFOPLIST_FILE: "YES"
+
+schemes:
+  CleanMyMewp:
+    build:
+      targets:
+        CleanMyMewp: all
+        CleanMyMewpTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - CleanMyMewpTests
