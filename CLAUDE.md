@@ -86,6 +86,31 @@ Requirements: Xcode 26, macOS 14+ deployment target, Apple Silicon or Intel. Swi
 - Replacing `/Applications/CleanMyMewp.app` invalidates its Full Disk Access grant, because an
   ad hoc signature is tied to the bundle's cdhash. Re-grant after every install.
 
+## Releasing
+
+The app ships two places: a GitHub release on `ExplodingCB/cleanmymewp` and a Homebrew cask in
+`ExplodingCB/homebrew-tap` (`brew install --cask explodingcb/tap/cleanmymewp`).
+
+```sh
+xcodegen generate
+xcodebuild -project CleanMyMewp.xcodeproj -scheme CleanMyMewp -configuration Release \
+  -destination 'platform=macOS' -derivedDataPath ./build \
+  ARCHS="arm64 x86_64" ONLY_ACTIVE_ARCH=NO build          # universal, both arches
+ditto -c -k --sequesterRsrc --keepParent \
+  build/Build/Products/Release/CleanMyMewp.app dist/CleanMyMewp-<version>.zip
+shasum -a 256 dist/CleanMyMewp-<version>.zip              # goes in the cask
+gh release create v<version> dist/CleanMyMewp-<version>.zip --repo ExplodingCB/cleanmymewp
+```
+
+Then bump `version` and `sha256` in the tap's `Casks/cleanmymewp.rb` and push. The cask has a
+`postflight` that runs `xattr -dr com.apple.quarantine`, because the ad hoc signature is not
+notarized and macOS would otherwise refuse to open the downloaded bundle.
+
+Cask gotchas: `depends_on macos: ">= :sonoma"` and `url ..., verified:` are both deprecated —
+use `depends_on macos: :sonoma` and a bare `url`. `brew audit --cask --new` will still fail on
+"repository not notable enough" and Gatekeeper signature verification; both are expected for a
+personal tap with ad hoc signing.
+
 ## Status
 
 Version 0.4.1 (build 7) cuts Space Lens memory by ~75× (1.81M tree nodes → 24k on a real home
