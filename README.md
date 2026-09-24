@@ -21,8 +21,15 @@ To upgrade later:
 brew upgrade --cask mewp
 ```
 
-Mewp used to be called CleanMyMewp. If you installed it under that name, `brew upgrade` moves
-you to the `mewp` cask automatically; you'll need to grant Full Disk Access to `Mewp.app` again.
+Mewp used to be called CleanMyMewp. If you installed it under that name with Homebrew, switch
+over with:
+
+```sh
+brew uninstall --cask cleanmymewp
+brew install --cask explodingcb/tap/mewp
+```
+
+Then grant Full Disk Access to `Mewp.app` again.
 
 To uninstall:
 
