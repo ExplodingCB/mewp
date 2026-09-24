@@ -40,6 +40,12 @@ Requirements: Xcode 26, macOS 14+ deployment target, Apple Silicon or Intel. Swi
   Duplicates, Uninstaller, Similar Images, Performance, and Startup Items.
 - `Tests/MewpTests/` — engine tests against throwaway fixture trees (never the real home dir).
 
+## App icon
+
+The icon is drawn in code by `scripts/make-icon.swift` (a flat white cat head on a blue
+tile). Edit the script and rerun `swift scripts/make-icon.swift` rather than replacing the
+PNGs by hand. It also rewrites `app-icon.png`, which the similar-images test uses as a fixture.
+
 ## Keep clear of MacPaw's IP
 
 Mewp is an independent, open-source cleaner. Don't use MacPaw's product or feature names
