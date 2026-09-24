@@ -17,7 +17,7 @@ struct MenuBarMonitorView: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Image(systemName: "pawprint.fill").foregroundStyle(.teal)
-                Text("CleanMyMewp").font(.headline)
+                Text("Mewp").font(.headline)
                 Spacer()
                 if let battery = monitor.snapshot.batteryPercent {
                     Label(
@@ -53,15 +53,15 @@ struct MenuBarMonitorView: View {
             .font(.caption)
             Divider()
             Button {
-                navigation.requestSmartCareScan()
+                navigation.requestCheckupScan()
                 NSApp.activate(ignoringOtherApps: true)
                 NSApp.windows.first { $0.canBecomeMain }?.makeKeyAndOrderFront(nil)
             } label: {
-                Label("Run Smart Care Scan", systemImage: "checkmark.shield")
+                Label("Run Checkup", systemImage: "checkmark.shield")
                     .frame(maxWidth: .infinity)
             }
             HStack {
-                Button("Open CleanMyMewp") {
+                Button("Open Mewp") {
                     NSApp.activate(ignoringOtherApps: true)
                     NSApp.windows.first { $0.canBecomeMain }?.makeKeyAndOrderFront(nil)
                 }

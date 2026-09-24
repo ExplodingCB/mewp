@@ -2,10 +2,10 @@ import SwiftUI
 
 /// Top-level module list.
 enum Module: String, CaseIterable, Identifiable {
-    case smartCare = "Smart Care"
+    case checkup = "Checkup"
     case cleanup = "Cleanup"
-    case spaceLens = "Space Lens"
-    case largeOld = "Large & Old Files"
+    case spaceMap = "Space Map"
+    case largeFiles = "Large Files"
     case duplicates = "Duplicates"
     case uninstaller = "Uninstaller"
     case similarImages = "Similar Images"
@@ -16,10 +16,10 @@ enum Module: String, CaseIterable, Identifiable {
 
     var systemImage: String {
         switch self {
-        case .smartCare: return "checkmark.shield"
+        case .checkup: return "checkmark.shield"
         case .cleanup: return "sparkles"
-        case .spaceLens: return "chart.pie"
-        case .largeOld: return "tray.full"
+        case .spaceMap: return "chart.pie"
+        case .largeFiles: return "tray.full"
         case .duplicates: return "square.on.square"
         case .uninstaller: return "trash.slash"
         case .similarImages: return "photo.on.rectangle.angled"
@@ -31,16 +31,16 @@ enum Module: String, CaseIterable, Identifiable {
 
 @MainActor
 final class AppNavigationModel: ObservableObject {
-    @Published var selection: Module = .smartCare
-    @Published private(set) var smartCareScanPending = false
+    @Published var selection: Module = .checkup
+    @Published private(set) var checkupScanPending = false
 
-    func requestSmartCareScan() {
-        selection = .smartCare
-        smartCareScanPending = true
+    func requestCheckupScan() {
+        selection = .checkup
+        checkupScanPending = true
     }
 
-    func consumeSmartCareScanRequest() {
-        smartCareScanPending = false
+    func consumeCheckupScanRequest() {
+        checkupScanPending = false
     }
 }
 
@@ -90,16 +90,16 @@ struct RootView: View {
 
     @ViewBuilder private var detail: some View {
         switch navigation.selection {
-        case .smartCare:
-            SmartCareView()
+        case .checkup:
+            CheckupView()
                 .environmentObject(permissions)
         case .cleanup:
             CleanupView(vm: cleanupVM)
                 .environmentObject(permissions)
-        case .spaceLens:
-            SpaceLensView()
-        case .largeOld:
-            LargeOldView()
+        case .spaceMap:
+            SpaceMapView()
+        case .largeFiles:
+            LargeFilesView()
         case .duplicates:
             DuplicatesView()
         case .uninstaller:

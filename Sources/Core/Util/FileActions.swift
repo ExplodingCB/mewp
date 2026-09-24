@@ -1,8 +1,8 @@
 import Foundation
 import AppKit
 
-/// Shared user-facing file operations for the browsing modules (Space Lens,
-/// Large & Old, Duplicates). Trash-first, like the Cleanup module.
+/// Shared user-facing file operations for the browsing modules (Space Map,
+/// Large Files, Duplicates). Trash-first, like the Cleanup module.
 enum FileActions {
 
     static func revealInFinder(_ url: URL) {

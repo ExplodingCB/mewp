@@ -1,5 +1,5 @@
 import XCTest
-@testable import CleanMyMewp
+@testable import Mewp
 
 final class Phase4Tests: XCTestCase {
     func testUninstallerMatchingRequiresBundleIdentifierBoundary() {
@@ -22,7 +22,7 @@ final class Phase4Tests: XCTestCase {
     }
 
     @MainActor
-    func testSmartCareReportsBrokenStartupItems() {
+    func testCheckupReportsBrokenStartupItems() {
         let performance = PerformanceSnapshot(
             memory: nil,
             pressure: .normal,
@@ -44,7 +44,7 @@ final class Phase4Tests: XCTestCase {
             isEnabled: true,
             isBroken: true
         )
-        let recommendations = SmartCareViewModel.makeRecommendations(
+        let recommendations = CheckupViewModel.makeRecommendations(
             performance: performance,
             startupItems: [startup]
         )
@@ -89,7 +89,7 @@ final class Phase4Tests: XCTestCase {
 
     func testAllRoadmapModulesAreAvailable() {
         XCTAssertEqual(Module.allCases.count, 9)
-        XCTAssertTrue(Module.allCases.contains(.smartCare))
+        XCTAssertTrue(Module.allCases.contains(.checkup))
         XCTAssertTrue(Module.allCases.contains(.uninstaller))
         XCTAssertTrue(Module.allCases.contains(.similarImages))
     }

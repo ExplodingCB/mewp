@@ -69,13 +69,13 @@ struct ModuleTheme {
 extension Module {
     var theme: ModuleTheme {
         switch self {
-        case .smartCare:
+        case .checkup:
             return ModuleTheme(colors: [Color(hex: 0x2BD9C6), Color(hex: 0x7C5CFC)])
         case .cleanup:
             return ModuleTheme(colors: [Color(hex: 0x2BD9C6), Color(hex: 0x3D7BFF)])
-        case .spaceLens:
+        case .spaceMap:
             return ModuleTheme(colors: [Color(hex: 0xB44CF0), Color(hex: 0x5B5BF7)])
-        case .largeOld:
+        case .largeFiles:
             return ModuleTheme(colors: [Color(hex: 0xFFB340), Color(hex: 0xFF6482)])
         case .duplicates:
             return ModuleTheme(colors: [Color(hex: 0xFF5FA2), Color(hex: 0x8E54E9)])
@@ -290,8 +290,8 @@ struct GradientButtonStyle: ButtonStyle {
 
 // MARK: - The big scan button
 
-/// CleanMyMac's signature element: a large circular gradient button with a soft glow
-/// and translucent halo rings, breathing slightly while idle.
+/// The landing screen's call to action: a large circular gradient button with a soft
+/// glow and translucent halo rings, breathing slightly while idle.
 struct BigScanButton: View {
     var title: String
     var systemImage: String

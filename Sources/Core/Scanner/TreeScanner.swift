@@ -7,7 +7,7 @@ import AppKit
 /// locks). This avoids a single serial home-folder enumerator without multiplying
 /// tasks for every nested directory.
 enum TreeScanner {
-    /// Space Lens needs the largest files, not an in-memory object for every tiny leaf.
+    /// Space Map needs the largest files, not an in-memory object for every tiny leaf.
     /// Directories remain drillable while small file leaves collapse into one read-only
     /// summary row.
     ///
@@ -158,7 +158,7 @@ enum TreeScanner {
         let kept = Array(sortedFiles.prefix(maxVisibleFilesPerDirectory))
         let omitted = sortedFiles.dropFirst(maxVisibleFilesPerDirectory)
         let summary = FileNode(
-            url: parentURL.appendingPathComponent(".cleanmymewp-aggregate-\(UUID().uuidString)"),
+            url: parentURL.appendingPathComponent(".mewp-aggregate-\(UUID().uuidString)"),
             isDirectory: false,
             name: "Other smaller files",
             isAggregate: true

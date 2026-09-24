@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct SmartCareRecommendation: Identifiable, Sendable {
+struct CheckupRecommendation: Identifiable, Sendable {
     enum Severity: Sendable {
         case notice
         case warning
@@ -15,7 +15,7 @@ struct SmartCareRecommendation: Identifiable, Sendable {
 }
 
 @MainActor
-final class SmartCareViewModel: ObservableObject {
+final class CheckupViewModel: ObservableObject {
     @Published private(set) var categories: [CategoryScanResult] = []
     @Published private(set) var duplicateGroups: [DuplicateGroup] = []
     @Published private(set) var leftovers: [AppLeftover] = []
@@ -23,11 +23,11 @@ final class SmartCareViewModel: ObservableObject {
     @Published private(set) var cleaning = false
     @Published private(set) var status = ""
     @Published private(set) var result: MaintenanceResult?
-    @Published private(set) var recommendations: [SmartCareRecommendation] = []
+    @Published private(set) var recommendations: [CheckupRecommendation] = []
     @Published var selectedCategoryIDs: Set<String> = []
     @Published var includeDuplicates = true
     /// Leftovers stay opt-out-by-default-off: they are orphaned bundle-ID guesses, not
-    /// safety-database entries, so Smart Care surfaces them but never pre-checks them.
+    /// safety-database entries, so Checkup surfaces them but never pre-checks them.
     @Published var includeLeftovers = false
 
     var selectedJunk: [JunkItem] {
@@ -90,12 +90,12 @@ final class SmartCareViewModel: ObservableObject {
     static func makeRecommendations(
         performance: PerformanceSnapshot,
         startupItems: [StartupItem]
-    ) -> [SmartCareRecommendation] {
-        var output: [SmartCareRecommendation] = []
+    ) -> [CheckupRecommendation] {
+        var output: [CheckupRecommendation] = []
 
         if performance.pressure == .warning || performance.pressure == .critical {
             output.append(
-                SmartCareRecommendation(
+                CheckupRecommendation(
                     id: "memory-pressure",
                     title: "\(performance.pressure.rawValue) memory pressure",
                     detail: "Review the top memory users before purging file cache. Purging does not close apps or erase their memory.",
@@ -107,7 +107,7 @@ final class SmartCareViewModel: ObservableObject {
         }
         if performance.thermalState != "Nominal" {
             output.append(
-                SmartCareRecommendation(
+                CheckupRecommendation(
                     id: "thermal-state",
                     title: "\(performance.thermalState) thermal state",
                     detail: "CPU performance may be reduced until the Mac cools down.",
@@ -124,7 +124,7 @@ final class SmartCareViewModel: ObservableObject {
                     .map { " with \($0)% maximum capacity." }
                     ?? "."
                 output.append(
-                    SmartCareRecommendation(
+                    CheckupRecommendation(
                         id: "battery-health",
                         title: "Review battery health",
                         detail: "Battery condition is \(battery.condition.lowercased())"
@@ -138,7 +138,7 @@ final class SmartCareViewModel: ObservableObject {
                       percentage <= 25,
                       !battery.lowPowerMode {
                 output.append(
-                    SmartCareRecommendation(
+                    CheckupRecommendation(
                         id: "low-power-mode",
                         title: "Low Power Mode is available",
                         detail: "The battery is at \(percentage)%. Performance can enable Low Power Mode for the battery profile.",
@@ -153,7 +153,7 @@ final class SmartCareViewModel: ObservableObject {
         let brokenItems = startupItems.filter(\.isBroken).count
         if brokenItems > 0 {
             output.append(
-                SmartCareRecommendation(
+                CheckupRecommendation(
                     id: "broken-startup-items",
                     title: "\(brokenItems) broken startup item\(brokenItems == 1 ? "" : "s")",
                     detail: "The configured executable is missing. Review the plist before disabling it.",
@@ -220,17 +220,17 @@ final class SmartCareViewModel: ObservableObject {
     }
 }
 
-struct SmartCareView: View {
+struct CheckupView: View {
     @EnvironmentObject private var permissions: PermissionsModel
     @EnvironmentObject private var navigation: AppNavigationModel
-    @StateObject private var vm = SmartCareViewModel()
+    @StateObject private var vm = CheckupViewModel()
     @State private var confirming = false
-    private let theme = Module.smartCare.theme
+    private let theme = Module.checkup.theme
 
     var body: some View {
         VStack(spacing: 0) {
             ModuleHeader(
-                title: "Smart Care",
+                title: "Checkup",
                 subtitle: "Safe cleanup, exact duplicates, app leftovers, and system health in one pass."
             ) {
                 if vm.hasFindings {
@@ -254,9 +254,9 @@ struct SmartCareView: View {
         } message: {
             Text("Only the checked safe categories and verified duplicate copies will be moved. One copy from every duplicate group remains.")
         }
-        .task(id: navigation.smartCareScanPending) {
-            guard navigation.smartCareScanPending else { return }
-            navigation.consumeSmartCareScanRequest()
+        .task(id: navigation.checkupScanPending) {
+            guard navigation.checkupScanPending else { return }
+            navigation.consumeCheckupScanRequest()
             await vm.scan(fullDiskAccess: permissions.fullDiskAccessGranted)
         }
     }

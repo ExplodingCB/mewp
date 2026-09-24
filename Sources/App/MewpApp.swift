@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct CleanMyMewpApp: App {
+struct MewpApp: App {
     @StateObject private var permissions = PermissionsModel()
     @StateObject private var monitor = SystemMonitorModel()
     @StateObject private var navigation = AppNavigationModel()
@@ -24,7 +24,7 @@ struct CleanMyMewpApp: App {
                 .environmentObject(monitor)
                 .environmentObject(navigation)
         } label: {
-            Label("CleanMyMewp", systemImage: "pawprint.fill")
+            Label("Mewp", systemImage: "pawprint.fill")
         }
         .menuBarExtraStyle(.window)
     }

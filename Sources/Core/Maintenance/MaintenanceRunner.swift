@@ -144,7 +144,7 @@ enum MaintenanceRunner {
 
         let destination = FileManager.default.homeDirectoryForCurrentUser
             .appendingPathComponent(".Trash")
-            .appendingPathComponent("CleanMyMewp Admin Items \(UUID().uuidString)")
+            .appendingPathComponent("Mewp Admin Items \(UUID().uuidString)")
         do {
             try FileManager.default.createDirectory(at: destination, withIntermediateDirectories: true)
         } catch {

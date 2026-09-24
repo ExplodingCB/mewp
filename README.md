@@ -1,7 +1,7 @@
-# CleanMyMewp
+# Mewp
 
-A free, native **Swift / SwiftUI macOS cleaner** — a personal-use alternative to CleanMyMac,
-minus the malware scanner and the app updater.
+A free, open-source, native **Swift / SwiftUI macOS cleaner**: junk cleanup, a disk space map,
+large-file and duplicate finders, an uninstaller, and more.
 
 Nine modules plus a menu-bar monitor, built entirely on native APIs (sysctl, Vision,
 `FileManager`), with a safety database that decides what is allowed to be touched.
@@ -9,30 +9,33 @@ Nine modules plus a menu-bar monitor, built entirely on native APIs (sysctl, Vis
 ## Install
 
 ```sh
-brew install --cask explodingcb/tap/cleanmymewp
+brew install --cask explodingcb/tap/mewp
 ```
 
 That taps [`ExplodingCB/homebrew-tap`](https://github.com/ExplodingCB/homebrew-tap) and drops
-`CleanMyMewp.app` into `/Applications`.
+`Mewp.app` into `/Applications`.
 
 To upgrade later:
 
 ```sh
-brew upgrade --cask cleanmymewp
+brew upgrade --cask mewp
 ```
+
+Mewp used to be called CleanMyMewp. If you installed it under that name, `brew upgrade` moves
+you to the `mewp` cask automatically; you'll need to grant Full Disk Access to `Mewp.app` again.
 
 To uninstall:
 
 ```sh
-brew uninstall --cask cleanmymewp
+brew uninstall --cask mewp
 ```
 
 Prefer not to use Homebrew? Grab the `.zip` from the
-[latest release](https://github.com/ExplodingCB/cleanmymewp/releases/latest),
+[latest release](https://github.com/ExplodingCB/mewp/releases/latest),
 unzip it into `/Applications`, and run:
 
 ```sh
-xattr -dr com.apple.quarantine /Applications/CleanMyMewp.app
+xattr -dr com.apple.quarantine /Applications/Mewp.app
 ```
 
 > The app is **ad-hoc signed** (no paid Apple Developer account), so it is not notarized.
@@ -52,10 +55,10 @@ Requirements: macOS 14 or later, Apple Silicon or Intel (the release binary is u
 
 | Module | What it does |
 | --- | --- |
-| **Smart Care** | One-pass scan combining junk, leftovers, and system-health recommendations |
+| **Checkup** | One-pass scan combining junk, leftovers, and system-health recommendations |
 | **Cleanup** | Caches, logs, browser data, sandbox containers, package-manager junk, Trash |
-| **Space Lens** | Interactive bubble map of what is eating your disk |
-| **Large & Old** | Big files you have not touched in a long time |
+| **Space Map** | Interactive bubble map of what is eating your disk |
+| **Large Files** | Big files you have not touched in a long time |
 | **Duplicates** | Size → 64 KB partial hash → full SHA-256 |
 | **Uninstaller** | App inventory, six-month-unused filter, strict bundle-ID leftover matching |
 | **Similar Images** | Local dHash prefilter plus Vision feature-print comparison |
@@ -88,15 +91,15 @@ brew install xcodegen
 xcodegen generate
 
 # Debug build
-xcodebuild -project CleanMyMewp.xcodeproj -scheme CleanMyMewp \
+xcodebuild -project Mewp.xcodeproj -scheme Mewp \
   -configuration Debug -destination 'platform=macOS' build
 
 # Unit tests (32 of them)
-xcodebuild -project CleanMyMewp.xcodeproj -scheme CleanMyMewp \
+xcodebuild -project Mewp.xcodeproj -scheme Mewp \
   -configuration Debug -destination 'platform=macOS' test
 
 # Universal release build, the way the shipped .app is produced
-xcodebuild -project CleanMyMewp.xcodeproj -scheme CleanMyMewp \
+xcodebuild -project Mewp.xcodeproj -scheme Mewp \
   -configuration Release -destination 'platform=macOS' \
   -derivedDataPath ./build ARCHS="arm64 x86_64" ONLY_ACTIVE_ARCH=NO build
 ```
@@ -104,9 +107,9 @@ xcodebuild -project CleanMyMewp.xcodeproj -scheme CleanMyMewp \
 Requires Xcode 26. Signing is ad-hoc (`CODE_SIGN_IDENTITY: "-"`), so no Apple Developer
 account is needed.
 
-> `xcodebuild test` leaves a stale `CleanMyMewpTests.xctest` inside the Debug `.app`, which
+> `xcodebuild test` leaves a stale `MewpTests.xctest` inside the Debug `.app`, which
 > makes the next `build` fail codesign with "bundle format unrecognized". Delete the Debug
-> `CleanMyMewp.app` before rebuilding.
+> `Mewp.app` before rebuilding.
 
 ## Layout
 
@@ -132,4 +135,5 @@ Tests/             engine tests against throwaway fixture trees
 
 MIT — see [LICENSE](LICENSE).
 
-Not affiliated with MacPaw or CleanMyMac.
+Mewp is an independent project. It is not affiliated with, endorsed by, or sponsored by
+MacPaw, and it contains no MacPaw code, artwork, or text. CleanMyMac is a trademark of MacPaw.

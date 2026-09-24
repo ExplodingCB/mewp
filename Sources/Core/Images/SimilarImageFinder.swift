@@ -46,7 +46,7 @@ enum SimilarImageFinder {
         let entries = collection.entries
         guard entries.count > 1 else {
             let detail = collection.hadReadError
-                ? "CleanMyMewp could not read this folder. Choose another folder or grant the required Files and Folders access in System Settings."
+                ? "Mewp could not read this folder. Choose another folder or grant the required Files and Folders access in System Settings."
                 : "Found \(entries.count) image\(entries.count == 1 ? "" : "s"). At least two ordinary image files are needed."
             return SimilarImageScanResult(
                 pairs: [],

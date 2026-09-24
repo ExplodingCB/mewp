@@ -1,6 +1,6 @@
 import Foundation
 
-/// Lightweight metadata for one file. Used by Large & Old and the duplicate
+/// Lightweight metadata for one file. Used by Large Files and the duplicate
 /// finder, which want a flat list, not a tree.
 struct FileEntry: Identifiable, Sendable, Hashable {
     var url: URL

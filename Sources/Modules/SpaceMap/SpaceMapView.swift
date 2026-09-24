@@ -1,7 +1,7 @@
 import SwiftUI
 
 @MainActor
-final class SpaceLensViewModel: ObservableObject {
+final class SpaceMapViewModel: ObservableObject {
     enum Phase: Equatable { case idle, scanning, ready }
 
     @Published var phase: Phase = .idle
@@ -140,10 +140,10 @@ final class SpaceLensViewModel: ObservableObject {
     }
 }
 
-struct SpaceLensView: View {
-    @StateObject private var vm = SpaceLensViewModel()
+struct SpaceMapView: View {
+    @StateObject private var vm = SpaceMapViewModel()
 
-    private let theme = Module.spaceLens.theme
+    private let theme = Module.spaceMap.theme
 
     var body: some View {
         VStack(spacing: 0) {
@@ -176,7 +176,7 @@ struct SpaceLensView: View {
     // MARK: - Header
 
     private var header: some View {
-        ModuleHeader(title: "Space Lens",
+        ModuleHeader(title: "Space Map",
                      subtitle: "Bigger bubble, bigger space. Click a bubble to look inside.") {
             if vm.phase == .ready {
                 Button { Task { await vm.scan(vm.scanRoot) } } label: {
@@ -297,7 +297,7 @@ struct SpaceLensView: View {
 // MARK: - Bubble map
 
 struct BubbleMapView: View {
-    @ObservedObject var vm: SpaceLensViewModel
+    @ObservedObject var vm: SpaceMapViewModel
     let focus: FileNode
     @State private var bubbles: [Bubble] = []
     @Namespace private var glassNamespace
@@ -529,7 +529,7 @@ struct BubbleView: View {
 // MARK: - Ranked list panel
 
 struct FolderListPanel: View {
-    @ObservedObject var vm: SpaceLensViewModel
+    @ObservedObject var vm: SpaceMapViewModel
     let focus: FileNode
 
     var body: some View {

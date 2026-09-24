@@ -1,7 +1,7 @@
 import SwiftUI
 
 @MainActor
-final class LargeOldViewModel: ObservableObject {
+final class LargeFilesViewModel: ObservableObject {
     enum Phase: Equatable { case idle, scanning, ready }
     enum Sort: String, CaseIterable, Identifiable { case size = "Largest", age = "Oldest"; var id: String { rawValue } }
 
@@ -97,11 +97,11 @@ final class LargeOldViewModel: ObservableObject {
     }
 }
 
-struct LargeOldView: View {
-    @StateObject private var vm = LargeOldViewModel()
+struct LargeFilesView: View {
+    @StateObject private var vm = LargeFilesViewModel()
     @State private var confirmingTrash = false
 
-    private let theme = Module.largeOld.theme
+    private let theme = Module.largeFiles.theme
 
     var body: some View {
         VStack(spacing: 0) {
@@ -128,7 +128,7 @@ struct LargeOldView: View {
     }
 
     private var header: some View {
-        ModuleHeader(title: "Large & Old Files",
+        ModuleHeader(title: "Large Files",
                      subtitle: "Big files you haven't opened in a while.") {
             Button("Choose Folder…") { chooseAndScan() }
                 .buttonStyle(GradientButtonStyle(colors: theme.colors, prominent: false))
@@ -150,7 +150,7 @@ struct LargeOldView: View {
                 Text("Any time").tag(0); Text("3 months").tag(3); Text("6 months").tag(6); Text("1 year").tag(12); Text("2 years").tag(24)
             }.fixedSize()
             Picker("Sort", selection: $vm.sort) {
-                ForEach(LargeOldViewModel.Sort.allCases) { Text($0.rawValue).tag($0) }
+                ForEach(LargeFilesViewModel.Sort.allCases) { Text($0.rawValue).tag($0) }
             }.pickerStyle(.segmented).fixedSize()
             Spacer()
         }

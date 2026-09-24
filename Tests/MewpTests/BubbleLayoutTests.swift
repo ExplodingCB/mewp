@@ -1,6 +1,6 @@
 import XCTest
 import CoreGraphics
-@testable import CleanMyMewp
+@testable import Mewp
 
 final class BubbleLayoutTests: XCTestCase {
 

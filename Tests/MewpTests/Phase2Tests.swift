@@ -1,5 +1,5 @@
 import XCTest
-@testable import CleanMyMewp
+@testable import Mewp
 
 final class Phase2Tests: XCTestCase {
 

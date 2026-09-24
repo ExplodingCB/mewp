@@ -1,7 +1,7 @@
 import Foundation
 
 /// A node in a scanned directory tree. Reference type so a big tree can be built
-/// bottom-up and re-rooted cheaply by the Space Lens UI. `size` is aggregate
+/// bottom-up and re-rooted cheaply by the Space Map UI. `size` is aggregate
 /// allocated bytes (a directory's size is the sum of its subtree).
 final class FileNode: Identifiable {
     let url: URL

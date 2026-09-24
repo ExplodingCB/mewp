@@ -1,4 +1,4 @@
-name: CleanMyMewp
+name: Mewp
 options:
   bundleIdPrefix: com.chaseculbertson
   deploymentTarget:
@@ -8,8 +8,8 @@ options:
 
 settings:
   base:
-    MARKETING_VERSION: "0.4.1"
-    CURRENT_PROJECT_VERSION: "7"
+    MARKETING_VERSION: "0.5.0"
+    CURRENT_PROJECT_VERSION: "8"
     SWIFT_VERSION: "5.0"
     DEVELOPMENT_TEAM: ""
     CODE_SIGN_STYLE: Manual
@@ -29,55 +29,55 @@ settings:
       SWIFT_COMPILATION_MODE: "wholemodule"
 
 targets:
-  CleanMyMewp:
+  Mewp:
     type: application
     platform: macOS
     sources:
       - path: Sources
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.chaseculbertson.CleanMyMewp
-        PRODUCT_NAME: CleanMyMewp
+        PRODUCT_BUNDLE_IDENTIFIER: com.chaseculbertson.Mewp
+        PRODUCT_NAME: Mewp
         INFOPLIST_KEY_NSHumanReadableCopyright: "Personal use build"
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         COMBINE_HIDPI_IMAGES: "YES"
     info:
       path: Sources/App/Info.plist
       properties:
-        CFBundleName: CleanMyMewp
-        CFBundleDisplayName: CleanMyMewp
+        CFBundleName: Mewp
+        CFBundleDisplayName: Mewp
         CFBundleShortVersionString: "$(MARKETING_VERSION)"
         CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
         LSMinimumSystemVersion: "14.0"
         LSApplicationCategoryType: public.app-category.utilities
         NSHighResolutionCapable: true
-        NSDesktopFolderUsageDescription: "CleanMyMewp scans your Desktop to find large and old files."
-        NSDocumentsFolderUsageDescription: "CleanMyMewp scans your Documents to find large and old files."
-        NSDownloadsFolderUsageDescription: "CleanMyMewp scans your Downloads for junk, duplicates, and old files."
-        NSRemovableVolumesUsageDescription: "CleanMyMewp scans connected volumes to empty their trash and find large files."
-        NSPhotoLibraryUsageDescription: "CleanMyMewp only measures the size of your Photos library so it appears in the storage map. It never opens, reads, or uploads your photos."
+        NSDesktopFolderUsageDescription: "Mewp scans your Desktop to find large and old files."
+        NSDocumentsFolderUsageDescription: "Mewp scans your Documents to find large and old files."
+        NSDownloadsFolderUsageDescription: "Mewp scans your Downloads for junk, duplicates, and old files."
+        NSRemovableVolumesUsageDescription: "Mewp scans connected volumes to empty their trash and find large files."
+        NSPhotoLibraryUsageDescription: "Mewp only measures the size of your Photos library so it appears in the storage map. It never opens, reads, or uploads your photos."
 
-  CleanMyMewpTests:
+  MewpTests:
     type: bundle.unit-test
     platform: macOS
     sources:
       - path: Tests
     dependencies:
-      - target: CleanMyMewp
+      - target: Mewp
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.chaseculbertson.CleanMyMewpTests
+        PRODUCT_BUNDLE_IDENTIFIER: com.chaseculbertson.MewpTests
         GENERATE_INFOPLIST_FILE: "YES"
 
 schemes:
-  CleanMyMewp:
+  Mewp:
     build:
       targets:
-        CleanMyMewp: all
-        CleanMyMewpTests: [test]
+        Mewp: all
+        MewpTests: [test]
     run:
       config: Debug
     test:
       config: Debug
       targets:
-        - CleanMyMewpTests
+        - MewpTests

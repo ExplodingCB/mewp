@@ -306,7 +306,7 @@ enum SafetyRules {
     }
 
     /// Documented here so the exclusion is intentional and reviewable, never an
-    /// accident: these are things CleanMyMac-style tools sometimes touch that we
+    /// accident: these are things some Mac cleaning tools touch that we
     /// refuse to, because the downside outweighs the reclaimed space.
     static let excludedByDesign: [String] = [
         "/System/* — SIP-protected, read-only system volume",

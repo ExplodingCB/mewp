@@ -376,7 +376,7 @@ struct PerformanceView: View {
                 Spacer()
                 Button("Cleanup") { navigation.selection = .cleanup }
                     .buttonStyle(.link)
-                Button("Large files") { navigation.selection = .largeOld }
+                Button("Large files") { navigation.selection = .largeFiles }
                     .buttonStyle(.link)
             }
 

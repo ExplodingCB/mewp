@@ -97,7 +97,7 @@ struct StartupItemsView: View {
             if let item = pendingItem {
                 Text(item.isEnabled
                     ? "The service will be unloaded and prevented from starting. You can enable it again here."
-                    : "The service will be allowed to start and CleanMyMewp will ask launchd to load it.")
+                    : "The service will be allowed to start and Mewp will ask launchd to load it.")
             }
         }
     }

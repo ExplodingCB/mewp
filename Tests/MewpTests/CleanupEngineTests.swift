@@ -1,5 +1,5 @@
 import XCTest
-@testable import CleanMyMewp
+@testable import Mewp
 
 /// These tests build a throwaway fixture tree and assert the scanner/deleter
 /// only touch what they're supposed to. Nothing here reads the real home dir.

@@ -219,7 +219,7 @@ enum ApplicationScanner {
         leftovers: [AppLeftover]
     ) -> MaintenanceResult {
         guard app.canUninstall else {
-            return MaintenanceResult(succeeded: false, message: "CleanMyMewp cannot remove itself or a system app.")
+            return MaintenanceResult(succeeded: false, message: "Mewp cannot remove itself or a system app.")
         }
         guard FileManager.default.fileExists(atPath: app.url.path) else {
             return MaintenanceResult(succeeded: false, message: "The application is no longer at that location.")

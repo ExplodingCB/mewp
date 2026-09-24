@@ -326,7 +326,7 @@ struct UninstallerView: View {
             VStack(spacing: 10) {
                 Image(systemName: "shippingbox").font(.system(size: 44)).foregroundStyle(.secondary)
                 Text("Select an application").font(.title3).fontWeight(.semibold)
-                Text("CleanMyMewp will find strict bundle-ID matches for review.")
+                Text("Mewp will find strict bundle-ID matches for review.")
                     .foregroundStyle(.secondary)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)

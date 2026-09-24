@@ -55,7 +55,7 @@ struct CleanupView: View {
             }
             VStack(spacing: 6) {
                 Text("Scan for junk").font(.title3).fontWeight(.semibold)
-                Text("CleanMyMewp looks through caches, logs, developer junk, and the\nTrash to find space you can safely reclaim.")
+                Text("Mewp looks through caches, logs, developer junk, and the\nTrash to find space you can safely reclaim.")
                     .font(.callout).foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
             }

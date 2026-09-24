@@ -200,7 +200,7 @@ enum StartupItemController {
         guard !item.isAppleItem else {
             return MaintenanceResult(
                 succeeded: false,
-                message: "Apple launch items cannot be changed by CleanMyMewp."
+                message: "Apple launch items cannot be changed by Mewp."
             )
         }
         guard isValid(item) else {

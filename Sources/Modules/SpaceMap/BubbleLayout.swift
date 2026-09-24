@@ -12,7 +12,7 @@ struct Bubble: Identifiable {
     var id: URL { node.id }
 }
 
-/// CleanMyMac-style packed-bubble layout: every child of the focused folder
+/// Packed-bubble layout: every child of the focused folder
 /// becomes a circle whose AREA is proportional to its size, greedily packed
 /// around the middle of the canvas (largest first, spiraling outward). Pure
 /// math — no UI — so it's unit-testable.
