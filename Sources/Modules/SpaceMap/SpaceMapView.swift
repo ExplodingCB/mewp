@@ -154,6 +154,14 @@ struct SpaceMapView: View {
             case .ready: readyState
             }
         }
+        #if DEBUG
+        // README screenshots: map a folder with no personal names in it.
+        .task {
+            if let path = ProcessInfo.processInfo.environment["MEWP_SPACEMAP_ROOT"] {
+                await vm.scan(URL(fileURLWithPath: path))
+            }
+        }
+        #endif
         .confirmationDialog(
             "Move \(vm.pendingTrashNode?.name ?? "item") to Trash?",
             isPresented: Binding(

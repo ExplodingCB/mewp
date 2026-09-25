@@ -1,7 +1,11 @@
+<p align="center"><img src="docs/icon.png" width="128" alt="Mewp icon"></p>
+
 # Mewp
 
 A free, open-source, native **Swift / SwiftUI macOS cleaner**: junk cleanup, a disk space map,
 large-file and duplicate finders, an uninstaller, and more.
+
+<p align="center"><img src="docs/screenshots/space-map.png" width="820" alt="Space Map showing a bubble map of folder sizes"></p>
 
 Nine modules plus a menu-bar monitor, built entirely on native APIs (sysctl, Vision,
 `FileManager`), with a safety database that decides what is allowed to be touched.
@@ -71,6 +75,11 @@ Requirements: macOS 14 or later, Apple Silicon or Intel (the release binary is u
 | **Similar Images** | Local dHash prefilter plus Vision feature-print comparison |
 | **Performance** | Live memory pressure, swap, CPU, and top processes |
 | **Startup Items** | launchd agents and daemons, with enable/disable controls |
+
+<p align="center">
+  <img src="docs/screenshots/checkup.png" width="410" alt="Checkup">
+  <img src="docs/screenshots/performance.png" width="410" alt="Performance">
+</p>
 
 ## Safety rules
 

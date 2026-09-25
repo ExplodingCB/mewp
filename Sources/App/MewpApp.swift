@@ -13,7 +13,12 @@ struct MewpApp: App {
                 .environmentObject(monitor)
                 .environmentObject(navigation)
                 .frame(minWidth: 900, minHeight: 600)
-                .task { monitor.start() }
+                .task {
+                    monitor.start()
+                    #if DEBUG
+                    DebugSnapshot.runIfRequested(navigation: navigation)
+                    #endif
+                }
         }
         .windowStyle(.hiddenTitleBar)
         .windowToolbarStyle(.unified(showsTitle: false))

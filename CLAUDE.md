@@ -46,6 +46,23 @@ The icon is drawn in code by `scripts/make-icon.swift` (a flat white cat head on
 tile). Edit the script and rerun `swift scripts/make-icon.swift` rather than replacing the
 PNGs by hand. It also rewrites `app-icon.png`, which the similar-images test uses as a fixture.
 
+## README screenshots
+
+Debug builds can capture their own window (via ScreenCaptureKit, no Screen Recording
+permission needed). Regenerate `docs/screenshots/` with:
+
+```sh
+APP=build/Build/Products/Debug/Mewp.app/Contents/MacOS/Mewp
+MEWP_MODULE="Space Map" MEWP_SPACEMAP_ROOT=/System/Library MEWP_SNAPSHOT_DELAY=20 \
+  MEWP_APPEARANCE=dark MEWP_SNAPSHOT=/tmp/space-map.png $APP
+MEWP_MODULE=Checkup MEWP_APPEARANCE=dark MEWP_SNAPSHOT=/tmp/checkup.png $APP
+MEWP_MODULE=Performance MEWP_APPEARANCE=dark MEWP_SNAPSHOT_DELAY=6 MEWP_SNAPSHOT=/tmp/performance.png $APP
+sips -Z 1600 /tmp/space-map.png --out docs/screenshots/space-map.png   # and so on
+```
+
+Only screenshot screens without personal data: never a scanned home folder, the Uninstaller's
+app list, Large Files, or Duplicates results.
+
 ## Keep clear of MacPaw's IP
 
 Mewp is an independent, open-source cleaner. Don't use MacPaw's product or feature names
